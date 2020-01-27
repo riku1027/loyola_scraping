@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Curriculums</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Registration code</th>
+      <th>Start time</th>
+      <th>Period</th>
+      <th>Teacher</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @curriculums.each do |curriculum| %>
+      <tr>
+        <td><%= curriculum.name %></td>
+        <td><%= curriculum.registration_code %></td>
+        <td><%= curriculum.start_time %></td>
+        <td><%= curriculum.period %></td>
+        <td><%= curriculum.teacher %></td>
+        <td><%= link_to 'Show', curriculum %></td>
+        <td><%= link_to 'Edit', edit_curriculum_path(curriculum) %></td>
+        <td><%= link_to 'Destroy', curriculum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Curriculum', new_curriculum_path %>
