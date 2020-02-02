@@ -13,6 +13,9 @@
 !/log/.keep
 !/tmp/.keep
 
+# RubyMineの環境設定ファイルも除外
+/.idea
+
 
 # Ignore uploaded files in development
 /storage/*
@@ -29,3 +32,8 @@
 
 # よくわからんやつ
 /public
+
+# Gem管理
+.rbenv-gemsets
+vendor/bundle/
+.bundle
