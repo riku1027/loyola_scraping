@@ -1,0 +1,2 @@
+class CoursePeriod < ApplicationRecord
+end
