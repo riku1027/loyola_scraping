@@ -9,7 +9,13 @@
       <th>Registration code</th>
       <th>Start time</th>
       <th>Period</th>
-      <th>Teacher</th>
+      <th>履修人数</th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>他</th>
+      <th>評定平均値</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,7 +27,14 @@
         <td><%= curriculum.registration_code %></td>
         <td><%= curriculum.start_time %></td>
         <td><%= curriculum.period %></td>
-        <td><%= curriculum.teacher %></td>
+        <td><%= curriculum.participants_num %></td>
+        <td><%= curriculum.grade_a %></td>
+        <td><%= curriculum.grade_b %></td>
+        <td><%= curriculum.grade_c %></td>
+        <td><%= curriculum.grade_d %></td>
+        <td><%= curriculum.grade_e %></td>
+        <td><%= curriculum.grade_other %></td>
+        <td><%= curriculum.average_grade %></td>
         <td><%= link_to 'Show', curriculum %></td>
         <td><%= link_to 'Edit', edit_curriculum_path(curriculum) %></td>
         <td><%= link_to 'Destroy', curriculum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
