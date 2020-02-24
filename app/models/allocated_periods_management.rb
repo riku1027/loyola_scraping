@@ -1,0 +1,2 @@
+class AllocatedPeriodsManagement < ApplicationRecord
+end
