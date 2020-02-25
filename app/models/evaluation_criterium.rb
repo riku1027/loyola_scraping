@@ -1,2 +1,0 @@
-class EvaluationCriterium < ApplicationRecord
-end
