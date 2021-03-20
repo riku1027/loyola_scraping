@@ -1,5 +1,6 @@
 require './crawler/loyola_crawler'
 include Crawler
+require 'pry'
 
 class SyllabusCrawler < Crawler::LoyolaCrawler
   def initialize(id, password)
@@ -80,6 +81,13 @@ class SyllabusCrawler < Crawler::LoyolaCrawler
   def open_syllabus_page
     # 新規ウィンドウ(シラバス参照)にリンク
     @driver.switch_to.window(@driver.window_handles[1])
+
+    # 学期を変更
+    # TODO:要素のvalueの変更ができないので、とりあえず手動で対応。あとで修正。
+    # input_form_year = @driver.find_elements(:id,'nendo')[1]
+    # binding.pry
+    # select_input_form_year = Selenium::WebDriver::Support::Select.new(input_form_year)
+    # select_input_form_year.select_by(:value, '2021')
 
     # 検索ボタンを押下
     @driver.find_element(:xpath, "//input[@value = ' 検索開始 ']").click
