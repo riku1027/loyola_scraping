@@ -1,0 +1,8 @@
+vendor/
+.env
+
+*.xml
+*.iml
+
+Gemfile.lock
+config
