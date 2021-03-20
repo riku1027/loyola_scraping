@@ -2,8 +2,8 @@ require './sophian'
 require './lib/exporter'
 require "pry"
 
-sophian = Sophian.new(id: ARGV[0], password: ARGV[1])
-binding.pry
+sophian = Sophian.new(id: ENV['LOYOLA_LOGIN_ID'], password: ENV['LOYOLA_LOGIN_PASSWORD'])
+
 puts <<"EOS"
 [0]：シラバス情報をスクレイピング
 [1]：成績情報をスクレイピング
