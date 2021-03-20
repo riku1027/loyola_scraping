@@ -11,7 +11,7 @@ class GradeCrawler < Crawler::LoyolaCrawler
     move_to_target_page
     scraping_grade_info
   end
-  
+
   private
   def move_to_target_page
     # 成績評価分布へリンク
@@ -23,7 +23,7 @@ class GradeCrawler < Crawler::LoyolaCrawler
     # 検索開始
     search
   end
-  
+
   def scraping_grade_info
     # ページ数カウント用
     count = 1
@@ -49,31 +49,13 @@ class GradeCrawler < Crawler::LoyolaCrawler
 
       #########
       count += 1
+      break if count == 2
       break unless translate_result
     end
     puts "処理が完了しました"
     puts @crawl_results
   end
-  
-  def login_to_loyola
-    puts "loyolaにログインしまーす"
-    @driver.navigate.to 'https://scs.cl.sophia.ac.jp/campusweb/campusportal.do'
 
-    ################################ 検索フォームまでのリンク ####################################
-    # ログインIDとパスワードをセット
-    id = @driver.find_element(name: 'userName')
-    pass = @driver.find_element(name: 'password')
-
-    id.send_keys([@user_id])
-    pass.send_keys(@password)
-
-    # submitフォームが見つかるまで待機
-    @wait.until {@driver.find_element(:xpath, "//input[@type='submit']").displayed?}
-
-    # ログインする
-    @driver.find_element(:xpath, "//input[@type='submit']").location_once_scrolled_into_view
-    @driver.find_element(:xpath, "//input[@type='submit']").click
-  end
 
   def link_to_course_registration_page
     @wait.until {@driver.find_element(:xpath, "//div[@id='tab-si']").displayed?}
