@@ -9,12 +9,12 @@ puts <<EOS
 [1]：成績情報をスクレイピング
 EOS
 
-got_num = $stdin.gets.chomp
+got_num = $stdin.gets.chomp.to_i
 
 case got_num
-when '0'
+when 0
   sophian.crawl_syllabus_from_loyola
-when '1'
+when 1
   sophian.crawl_grade_from_loyola
 else
   puts '不正な数字です。処理を終了します。'
@@ -28,6 +28,6 @@ puts <<EOS
 何か文字を入力するとエクスポートを開始します。
 EOS
 
-got_num = STDIN.gets.chomp
+got_num = $stdin.gets.chomp
 
 Exporter.new.execute(crawl_results) if got_num
