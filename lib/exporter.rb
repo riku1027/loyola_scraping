@@ -63,11 +63,9 @@ class Exporter
     @sheet.add_cell(index, 17, target[:evaluation_reaction_paper].to_f)
     @sheet.add_cell(index, 18, target[:evaluation_short_test].to_f)
     @sheet.add_cell(index, 19, target[:evaluation_others].to_f)
-    curriculum = Curriculum.find_by(registration_code: target[:registration_code])
-    @sheet.add_cell(index, 20, curriculum.id) if curriculum
-    @sheet.add_cell(index, 21, target[:periods][0])
-    @sheet.add_cell(index, 22, target[:periods][1]) if target[:periods].size == 2
-    @sheet.add_cell(index, 23, target[:registration_code])
+    @sheet.add_cell(index, 20, target[:periods][0])
+    @sheet.add_cell(index, 21, target[:periods][1]) if target[:periods].size == 2
+    @sheet.add_cell(index, 22, target[:registration_code])
 
   end
 end
