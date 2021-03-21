@@ -1,6 +1,5 @@
-require './crawler/grade_crawler'
-require './crawler/syllabus_crawler'
-require './crawler/loyola_crawler'
+require_relative './crawler/grade_crawler'
+require_relative './crawler/syllabus_crawler'
 
 class Sophian
   attr_accessor :crawler_instance

@@ -1,7 +1,8 @@
+require_relative './base_exporter'
+include Exporter
 require 'rubyXL'
-require 'pry'
 
-class SyllabusExporter < Exporter
+class SyllabusExporter < Exporter::BaseExporter
   def initialize
     @book = RubyXL::Workbook.new
     @sheet =@book[0]

@@ -1,7 +1,7 @@
-require './crawler/loyola_crawler'
+require_relative './loyola_base_crawler'
 include Crawler
 
-class GradeCrawler < Crawler::LoyolaCrawler
+class GradeCrawler < Crawler::LoyolaBaseCrawler
   def initialize(id, password)
     super(id, password)
   end
