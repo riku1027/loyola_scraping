@@ -22,5 +22,7 @@
   export LOYOLA_LOGIN_ID LOYOLA_LOGIN_PASSWORD
 ```
 
+`$ source .env // 環境変数の読み込み`
+
 ## 使い方
 `$ ruby script.rb`
