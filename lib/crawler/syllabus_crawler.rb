@@ -1,3 +1,5 @@
+require 'bundler'
+Bundler.require
 require_relative './loyola_base_crawler'
 include Crawler
 

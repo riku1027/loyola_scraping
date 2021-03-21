@@ -1,3 +1,5 @@
+require 'bundler'
+Bundler.require
 require_relative './base_exporter'
 include Exporter
 require 'rubyXL'

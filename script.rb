@@ -1,6 +1,8 @@
+require 'bundler'
+Bundler.require
+
 require './lib/sophian'
 require './lib/exporter/grade_exporter'
-require 'pry'
 
 def crawl_syllabus(sophian)
   sophian.crawl_syllabus_from_loyola

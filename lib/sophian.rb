@@ -1,3 +1,5 @@
+require 'bundler'
+Bundler.require
 require_relative './crawler/grade_crawler'
 require_relative './crawler/syllabus_crawler'
 
