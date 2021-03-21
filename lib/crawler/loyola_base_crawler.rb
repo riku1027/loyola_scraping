@@ -1,7 +1,7 @@
 require 'selenium-webdriver'
 
 module Crawler
-  class LoyolaCrawler
+  class LoyolaBaseCrawler
     attr_accessor :crawl_results
     attr_accessor :false_crawl
 
