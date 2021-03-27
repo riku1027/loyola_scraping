@@ -1,75 +1,70 @@
 require_relative './base_exporter'
 include Exporter
-require 'rubyXL'
 
 class SyllabusExporter < Exporter::BaseExporter
   def initialize
-    @book = RubyXL::Workbook.new
-    @sheet =@book[0]
+    session = GoogleDrive::Session.from_config('config.json')
+    @sheet = session.spreadsheet_by_key(ENV['GOOGLE_SPREADSHEET_KEY']).worksheet_by_title(ENV["GOOGLE_SPREADSHEET_SHEET_NAME_SYLLABUS"])
     initialize_sheet
   end
   
   def execute(targets)
-    targets.each.with_index(1) do |target, index|
+    targets.each.with_index(2) do |target, index|
       add_cell_to_sheet(target, index)
     end
-    @book.write("令和3年春学期シラバス情報")
+    @sheet.save
   end
 
   private
   def initialize_sheet
-    @sheet.sheet_name = 'シラバス一覧'
-
-    @sheet.add_cell(0, 0, '講義名')
-    @sheet.add_cell(0, 1, '学部')
-    @sheet.add_cell(0, 2, '学科')
-    @sheet.add_cell(0, 3, '学期')
-    @sheet.add_cell(0, 4, '開講年')
-    @sheet.add_cell(0, 5, '開講時期')
-    @sheet.add_cell(0, 6, 'レベル')
-    @sheet.add_cell(0, 7, 'メイン講師')
-    @sheet.add_cell(0, 8, '単位')
-    @sheet.add_cell(0, 9, 'キーワード')
-    @sheet.add_cell(0, 10, '他学部受講可否')
-    @sheet.add_cell(0, 11, '評価出席')
-    @sheet.add_cell(0, 12, '評価レポート')
-    @sheet.add_cell(0, 13, '評価参加')
-    @sheet.add_cell(0, 14, '評価期末試験')
-    @sheet.add_cell(0, 15, '評価中間試験')
-    @sheet.add_cell(0, 16, '評価定期試験')
-    @sheet.add_cell(0, 17, '評価リアぺ')
-    @sheet.add_cell(0, 18, '評価クイズ')
-    @sheet.add_cell(0, 19, '評価その他')
-    @sheet.add_cell(0, 20, 'カリキュラムID')
-    @sheet.add_cell(0, 21, '曜日1')
-    @sheet.add_cell(0, 22, '曜日2')
-    @sheet.add_cell(0, 23, 'コード')
+    @sheet[1, 1]  = '講義名'
+    @sheet[1, 2]  = '学部'
+    @sheet[1, 3]  = '学科'
+    @sheet[1, 4]  = '学期'
+    @sheet[1, 5]  = '開講年'
+    @sheet[1, 6]  = '開講時期'
+    @sheet[1, 7]  = 'レベル'
+    @sheet[1, 8]  = 'メイン講師'
+    @sheet[1, 9]  = '単位'
+    @sheet[1, 10] = 'キーワード'
+    @sheet[1, 11] = '他学部受講可否'
+    @sheet[1, 12] = '評価出席'
+    @sheet[1, 13] = '評価レポート'
+    @sheet[1, 14] = '評価参加'
+    @sheet[1, 15] = '評価期末試験'
+    @sheet[1, 16] = '評価中間試験'
+    @sheet[1, 17] = '評価定期試験'
+    @sheet[1, 18] = '評価リアぺ'
+    @sheet[1, 19] = '評価クイズ'
+    @sheet[1, 20] = '評価その他'
+    @sheet[1, 21] = '曜日1'
+    @sheet[1, 22] = '曜日2'
+    @sheet[1, 23] = 'コード'
   end
 
   def add_cell_to_sheet(target, index)
-    @sheet.add_cell(index, 0,  target[:subject_name]    )
-    @sheet.add_cell(index, 1,  target[:faculty]       )
-    @sheet.add_cell(index, 2,  target[:department]      )
-    @sheet.add_cell(index, 3,  target[:semester]      )
-    @sheet.add_cell(index, 4,  target[:start_year]      )
-    @sheet.add_cell(index, 5,  target[:start_time]      )
-    @sheet.add_cell(index, 6,  target[:level]        )
-    @sheet.add_cell(index, 7,  target[:main_teacher_name])
-    @sheet.add_cell(index, 8,  target[:credits]     )
-    @sheet.add_cell(index, 9,  target[:keywords]     )
-    @sheet.add_cell(index, 10, target[:propriety]     )
-    @sheet.add_cell(index, 11, target[:evaluation_attendance].to_f     )
-    @sheet.add_cell(index, 12, target[:evaluation_report].to_f)
-    @sheet.add_cell(index, 13, target[:evaluation_class_participation].to_f)
-    @sheet.add_cell(index, 14, target[:evaluation_final_exam].to_f)
-    @sheet.add_cell(index, 15, target[:evaluation_midterm_exam].to_f)
-    @sheet.add_cell(index, 16, target[:evaluation_regular_exam].to_f)
-    @sheet.add_cell(index, 17, target[:evaluation_reaction_paper].to_f)
-    @sheet.add_cell(index, 18, target[:evaluation_short_test].to_f)
-    @sheet.add_cell(index, 19, target[:evaluation_others].to_f)
-    @sheet.add_cell(index, 20, target[:periods][0])
-    @sheet.add_cell(index, 21, target[:periods][1]) if target[:periods].size == 2
-    @sheet.add_cell(index, 22, target[:registration_code])
-
+    @sheet[index, 1]  = target[:subject_name]
+    @sheet[index, 2]  = target[:faculty]
+    @sheet[index, 3]  = target[:department]
+    @sheet[index, 4]  = target[:semester]
+    @sheet[index, 5]  = target[:start_year]
+    @sheet[index, 6]  = target[:start_time]
+    @sheet[index, 7]  = target[:level]
+    @sheet[index, 8]  = target[:main_teacher_name]
+    @sheet[index, 9]  = target[:credits]
+    @sheet[index, 10] = target[:keywords]
+    @sheet[index, 11] = target[:propriety]
+    @sheet[index, 12] = target[:evaluation_attendance]
+    @sheet[index, 13] = target[:evaluation_report]
+    @sheet[index, 14] = target[:evaluation_class_participation]
+    @sheet[index, 15] = target[:evaluation_final_exam]
+    @sheet[index, 16] = target[:evaluation_midterm_exam]
+    @sheet[index, 17] = target[:evaluation_regular_exam]
+    @sheet[index, 18] = target[:evaluation_reaction_paper]
+    @sheet[index, 19] = target[:evaluation_short_test]
+    @sheet[index, 20] = target[:evaluation_others]
+    @sheet[index, 21] = target[:periods][0]
+    @sheet[index, 22] = target[:periods][1] if target[:periods].size == 2
+    @sheet[index, 23] = target[:registration_code]
   end
 end
