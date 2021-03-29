@@ -1,6 +1,9 @@
+require 'bundler'
+Bundler.require
+
 require './lib/sophian'
 require './lib/exporter/grade_exporter'
-require 'pry'
+require './lib/exporter/syllabus_exporter'
 
 def crawl_syllabus(sophian)
   sophian.crawl_syllabus_from_loyola
@@ -27,7 +30,6 @@ def export_crawl_result(crawl_results, exporter_instance)
   puts '何か文字を入力するとエクスポートを開始します。'
   exporter_instance.execute(crawl_results) if $stdin.gets.chomp
 end
-binding.pry
 sophian = Sophian.new(id: ENV['LOYOLA_LOGIN_ID'], password: ENV['LOYOLA_LOGIN_PASSWORD'])
 
 puts <<EOS

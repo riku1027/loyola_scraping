@@ -1,4 +1,5 @@
-require 'rubyXL'
+require 'bundler'
+Bundler.require
 
 module Exporter
   class BaseExporter

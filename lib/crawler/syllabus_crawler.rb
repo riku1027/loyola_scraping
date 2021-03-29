@@ -1,3 +1,5 @@
+require 'bundler'
+Bundler.require
 require_relative './loyola_base_crawler'
 include Crawler
 
@@ -178,5 +180,20 @@ class SyllabusCrawler < Crawler::LoyolaBaseCrawler
   rescue => error
     puts error
     @false_crawl += 1
+  end
+
+  def translation_to_next_page
+    puts "次のページへ行くお⭐️"
+    @driver.find_elements(:xpath, "//a").reverse.each do |a|
+      if a.text.include? ("次へ")
+        puts "次のページへ遷移中"
+        a.click
+        sleep(1)
+        puts "遷移が完了しました"
+        return true
+      end
+    end
+    puts "次のページが見つかりませんでした"
+    false
   end
 end
